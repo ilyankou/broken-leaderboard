@@ -25,7 +25,11 @@ if (Meteor.isClient) {
       Players.remove(Session.get("selectedPlayer"));
     },
     'click #addPlayer': function(event, template) {
-      var input = template.find("#inputPlayerName").value;
+      var input = template.find("#inputPlayerName").value.trim();
+
+      // Player's name cannot be empty
+      if (input == "") return -1;
+
       Players.insert({
           name: input,
           score: 0
